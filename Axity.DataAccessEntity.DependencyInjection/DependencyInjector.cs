@@ -9,8 +9,17 @@
 namespace Axity.DataAccessEntity.DependencyInjection
 {
     using AutoMapper;
+    using Axity.DataAccessEntity.DataAccess.DAO.Interface;
+    using Axity.DataAccessEntity.DataAccess.DAO.User;
+    using Axity.DataAccessEntity.Dtos.User;
     using Axity.DataAccessEntity.Entities.Context;
+    using Axity.DataAccessEntity.Entities.Data.DataInital;
+    using Axity.DataAccessEntity.Entities.Model.User;
+    using Axity.DataAccessEntity.Facade.Interface;
+    using Axity.DataAccessEntity.Facade.User;
+    using Axity.DataAccessEntity.Services.Interface;
     using Axity.DataAccessEntity.Services.Mapping;
+    using Axity.DataAccessEntity.Services.User;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +40,13 @@ namespace Axity.DataAccessEntity.DependencyInjection
         {
             Services = services;
             Services.AddTransient<IDatabaseContext, DatabaseContext>();
+            Services.AddTransient<DataQueries>();
+
+            // User
+            Services.AddTransient<ICatalogDao<UserModel>, UserDao>();
+            Services.AddTransient<ICatalogService<UserDto>, UserService>();
+            Services.AddTransient<ICatalogFacade<UserDto>, UserFacade>();
+
             return Services;
         }
 

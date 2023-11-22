@@ -7,6 +7,7 @@ namespace Axity.DataAccessEntity.Entities.Model.User
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     [Index(nameof(UserName), IsUnique = true)]
 
@@ -34,6 +35,11 @@ namespace Axity.DataAccessEntity.Entities.Model.User
         [Required]
         public string Phone { get; set; }
         public bool Status { get; set; }
+
+        [NotMapped]
+        public string Estado { get; set; }
         public DateTime RegisterDate { get; set; }
+
+        public ICollection<UserRolModel> UserRol { get; set; }
     }
 }

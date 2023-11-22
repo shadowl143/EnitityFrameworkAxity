@@ -1,4 +1,6 @@
 ﻿
+using Axity.DataAccessEntity.Entities.Model.User;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Axity.DataAccessEntity.Entities.Model.Rols
@@ -20,5 +22,7 @@ namespace Axity.DataAccessEntity.Entities.Model.Rols
 
         [Column("Estado")]
         public bool Status { get; set; }
+
+        public ICollection<UserRolModel> UserRol { get; set; }
     }
 }

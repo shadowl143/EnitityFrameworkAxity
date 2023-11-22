@@ -16,7 +16,7 @@ namespace Axity.DataAccessEntity.Entities.Model.Actions
 
         [ForeignKey("FkPage")]
         public PageModel Page { get; set; }
-        public ActionModel Actions { get; set; }
+        public ActionModel Action { get; set; }
         public SubMenuModel SubMenu { get; set; }
     }
 }

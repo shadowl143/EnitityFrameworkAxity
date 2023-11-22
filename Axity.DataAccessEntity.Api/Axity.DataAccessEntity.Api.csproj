@@ -40,8 +40,4 @@
     <ProjectReference Include="..\Axity.DataAccessEntity.Resources\Axity.DataAccessEntity.Resources.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>

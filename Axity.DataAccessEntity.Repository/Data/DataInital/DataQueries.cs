@@ -14,11 +14,12 @@ namespace Axity.DataAccessEntity.Entities.Data.DataInital
 {
     public class DataQueries
     {
-        public IDatabaseContext DatabaseContext { get; }
+        private readonly IDatabaseContext databaseContext;
 
         public DataQueries(IDatabaseContext databaseContext)
         {
-            DatabaseContext = databaseContext;
+            this.databaseContext = databaseContext;
+            this.UserTable();
         }
         public static void Setup()
         {
@@ -27,7 +28,7 @@ namespace Axity.DataAccessEntity.Entities.Data.DataInital
 
         public void UserTable()
         {
-            var exist = this.DatabaseContext.Users.Any();
+            var exist = this.databaseContext.Users.Any();
             if (!exist)
             {
                 var list = new List<UserModel>
@@ -57,118 +58,9 @@ namespace Axity.DataAccessEntity.Entities.Data.DataInital
                         UserName = "user1",
                     },
                 };
-                this.DatabaseContext.Users.AddRange(list);
+                this.databaseContext.Users.AddRange(list);
+                ((DatabaseContext)this.databaseContext).SaveChanges();
             }
         }
-        public static List<RolModel> RolTable()
-        {
-            var list = new List<RolModel>
-            {
-                new RolModel
-                {
-                    Id = 1,
-                    Name = "rol",
-                    Description = "rol",
-                    Code = "rol",
-                    Status = true,
-                },
-                new RolModel
-                {
-                    Id = 2,
-                    Name = "rol1",
-                    Description = "rol1",
-                    Code = "rol1",
-                    Status = true,
-                },
-            };
-            return new List<RolModel>();
-        }
-        public static List<UserRolModel> UserRolTable()
-        {
-            var list = new List<UserRolModel>()
-            {
-                new UserRolModel
-                {
-                    UserId = 1,
-                    RolId = 1,
-                },
-                new UserRolModel
-                {
-                    UserId = 1,
-                    RolId = 2,
-                },
-                new UserRolModel
-                {
-                    UserId = 2,
-                    RolId = 1,
-                },
-            };
-            return list;
-        }
-        public static List<MenuModel> MenuTable()
-        {
-            var list = new List<MenuModel>()
-            {
-                new MenuModel
-                {
-                    Id= 1,
-                    Code = "menu",
-                    Name = "menu",
-                    Icon = "menu",
-                    Status = true,
-                },
-                new MenuModel
-                {
-                    Id= 2,
-                    Code = "menu 1",
-                    Name = "menu 1",
-                    Icon = "menu 1",
-                    Status = true,
-                },
-                new MenuModel
-                {
-                    Id= 3,
-                    Code = "menu 2",
-                    Name = "menu 2",
-                    Icon = "menu 2",
-                    Status = true,
-                },
-                new MenuModel
-                {
-                    Id= 4,
-                    Code = "menu 3",
-                    Name = "menu 3",
-                    Icon = "menu 3",
-                    Status = true,
-                },
-                new MenuModel
-                {
-                    Id= 5,
-                    Code = "menu 4",
-                    Name = "menu 4",
-                    Icon = "menu 4",
-                    Status = true,
-                },
-            };
-
-            return list;
-        }
-        public static List<SubMenuModel> SubMenuTable()
-        {
-            return new List<SubMenuModel>();
-        }
-        public static List<PageModel> PageTable()
-        {
-            return new List<PageModel>();
-        }
-        public static List<Action> ActionTable()
-        {
-            return new List<Action>();
-        }
-        public static List<ActSubPageModel> ActSubPageTable()
-        {
-            return new List<ActSubPageModel>();
-        }
-
     }
 }

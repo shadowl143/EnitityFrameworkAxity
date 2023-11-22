@@ -76,7 +76,7 @@ namespace Axity.DataAccessEntity.Entities.Data.DataInital
                     Status = true,
                 },
             };
-            return new List<RolModel>();
+            return list;
         }
         public static List<UserRolModel> UserRolTable()
         {

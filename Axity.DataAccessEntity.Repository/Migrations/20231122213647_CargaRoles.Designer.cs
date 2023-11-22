@@ -4,16 +4,18 @@ using Axity.DataAccessEntity.Entities.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Axity.DataAccessEntity.Entities.Data.Migration
+namespace Axity.DataAccessEntity.Entities.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20231122213647_CargaRoles")]
+    partial class CargaRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -549,6 +551,24 @@ namespace Axity.DataAccessEntity.Entities.Data.Migration
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "rol",
+                            Description = "rol",
+                            Name = "rol",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "rol1",
+                            Description = "rol1",
+                            Name = "rol1",
+                            Status = true
+                        });
                 });
 
             modelBuilder.Entity("Axity.DataAccessEntity.Entities.Model.User.UserModel", b =>
@@ -592,9 +612,9 @@ namespace Axity.DataAccessEntity.Entities.Data.Migration
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(120)
+                        .HasMaxLength(10)
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(120)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<DateTime>("RegisterDate")
                         .HasColumnType("datetime2");
@@ -618,7 +638,9 @@ namespace Axity.DataAccessEntity.Entities.Data.Migration
 
                     b.ToTable("Users", (string)null);
 
-                    b.ToTable(tb => tb.IsTemporal(ttb =>
+                    b
+                        .HasComment("Tabla usuarios")
+                        .ToTable(tb => tb.IsTemporal(ttb =>
                         {
                             ttb
                                 .HasPeriodStart("PeriodStart")

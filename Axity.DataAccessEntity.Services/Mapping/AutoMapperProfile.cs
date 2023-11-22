@@ -9,7 +9,11 @@
 namespace Axity.DataAccessEntity.Services.Mapping
 {
     using AutoMapper;
+    using Axity.DataAccessEntity.Dtos.User;
     using Axity.DataAccessEntity.Entities.Model;
+    using Axity.DataAccessEntity.Entities.Model.Rols;
+    using Axity.DataAccessEntity.Entities.Model.User;
+    using System.Linq;
 
     /// <summary>
     /// Class Automapper.
@@ -21,6 +25,15 @@ namespace Axity.DataAccessEntity.Services.Mapping
         /// </summary>
         public AutoMapperProfile()
         {
+            this.CreateMap<UserRolModel, RolUserDto>();
+            this.CreateMap<RolModel, RolDto>();
+
+            this.CreateMap<UserModel, UserDto>()
+                .ForMember(e => e.Status, opt => opt.MapFrom(src => src.Status ? "Activo" : "Incativo"))
+                .ForMember(e => e.Rols, opt => opt.MapFrom(src => src.UserRol.Select(e => e.Rol)));
+            this.CreateMap<UserDto, UserModel>()
+                .ForMember(e => e.Status, opt => opt.MapFrom(src => src.Status.Equals("Activo") ? true : false));
+
         }
     }
 }

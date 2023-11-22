@@ -12,6 +12,7 @@ namespace Axity.DataAccessEntity.Api
     using Axity.DataAccessEntity.Api.Filters;
     using Axity.DataAccessEntity.DependencyInjection;
     using Axity.DataAccessEntity.Entities.Context;
+    using Axity.DataAccessEntity.Entities.Data.DataInital;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
@@ -133,6 +134,11 @@ namespace Axity.DataAccessEntity.Api
                 var application = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
                 application.Database.Migrate();
             }
+
+            //using (var scope = app.ApplicationServices.CreateScope())
+            //{
+            //    var application = scope.ServiceProvider.GetRequiredService<DataQueries>();
+            //}
         }
 
         /// <summary>

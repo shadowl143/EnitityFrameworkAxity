@@ -4,18 +4,16 @@ using Axity.DataAccessEntity.Entities.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Axity.DataAccessEntity.Entities.Data.Migration
+namespace Axity.DataAccessEntity.Entities.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20231122205859_Actualizacion dos")]
-    partial class Actualizaciondos
+    partial class DatabaseContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,9 +71,6 @@ namespace Axity.DataAccessEntity.Entities.Data.Migration
                     b.Property<int>("ActionId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ActionsId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("FkPage")
                         .HasColumnType("int");
 
@@ -84,7 +79,7 @@ namespace Axity.DataAccessEntity.Entities.Data.Migration
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ActionsId");
+                    b.HasIndex("ActionId");
 
                     b.HasIndex("FkPage");
 
@@ -551,6 +546,24 @@ namespace Axity.DataAccessEntity.Entities.Data.Migration
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "rol",
+                            Description = "rol",
+                            Name = "rol",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "rol1",
+                            Description = "rol1",
+                            Name = "rol1",
+                            Status = true
+                        });
                 });
 
             modelBuilder.Entity("Axity.DataAccessEntity.Entities.Model.User.UserModel", b =>
@@ -594,9 +607,9 @@ namespace Axity.DataAccessEntity.Entities.Data.Migration
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(120)
+                        .HasMaxLength(10)
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(120)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<DateTime>("RegisterDate")
                         .HasColumnType("datetime2");
@@ -620,7 +633,9 @@ namespace Axity.DataAccessEntity.Entities.Data.Migration
 
                     b.ToTable("Users", (string)null);
 
-                    b.ToTable(tb => tb.IsTemporal(ttb =>
+                    b
+                        .HasComment("Tabla usuarios")
+                        .ToTable(tb => tb.IsTemporal(ttb =>
                         {
                             ttb
                                 .HasPeriodStart("PeriodStart")
@@ -670,6 +685,8 @@ namespace Axity.DataAccessEntity.Entities.Data.Migration
 
                     b.HasKey("UserId", "RolId");
 
+                    b.HasIndex("RolId");
+
                     b.ToTable("UserRols");
 
                     b.HasData(
@@ -692,9 +709,11 @@ namespace Axity.DataAccessEntity.Entities.Data.Migration
 
             modelBuilder.Entity("Axity.DataAccessEntity.Entities.Model.Actions.ActSubPageModel", b =>
                 {
-                    b.HasOne("Axity.DataAccessEntity.Entities.Model.Actions.ActionModel", "Actions")
+                    b.HasOne("Axity.DataAccessEntity.Entities.Model.Actions.ActionModel", "Action")
                         .WithMany()
-                        .HasForeignKey("ActionsId");
+                        .HasForeignKey("ActionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Axity.DataAccessEntity.Entities.Model.Menu.PageModel", "Page")
                         .WithMany()
@@ -704,7 +723,7 @@ namespace Axity.DataAccessEntity.Entities.Data.Migration
                         .WithMany()
                         .HasForeignKey("SubMenuId");
 
-                    b.Navigation("Actions");
+                    b.Navigation("Action");
 
                     b.Navigation("Page");
 
@@ -733,6 +752,25 @@ namespace Axity.DataAccessEntity.Entities.Data.Migration
                     b.Navigation("Menu");
                 });
 
+            modelBuilder.Entity("Axity.DataAccessEntity.Entities.Model.User.UserRolModel", b =>
+                {
+                    b.HasOne("Axity.DataAccessEntity.Entities.Model.Rols.RolModel", "Rol")
+                        .WithMany("UserRol")
+                        .HasForeignKey("RolId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Axity.DataAccessEntity.Entities.Model.User.UserModel", "User")
+                        .WithMany("UserRol")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Rol");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Axity.DataAccessEntity.Entities.Model.Menu.MenuModel", b =>
                 {
                     b.Navigation("SubMenu");
@@ -741,6 +779,16 @@ namespace Axity.DataAccessEntity.Entities.Data.Migration
             modelBuilder.Entity("Axity.DataAccessEntity.Entities.Model.Menu.SubMenuModel", b =>
                 {
                     b.Navigation("Pages");
+                });
+
+            modelBuilder.Entity("Axity.DataAccessEntity.Entities.Model.Rols.RolModel", b =>
+                {
+                    b.Navigation("UserRol");
+                });
+
+            modelBuilder.Entity("Axity.DataAccessEntity.Entities.Model.User.UserModel", b =>
+                {
+                    b.Navigation("UserRol");
                 });
 #pragma warning restore 612, 618
         }

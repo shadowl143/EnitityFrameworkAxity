@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Axity.DataAccessEntity.Entities.Data.Migration
+namespace Axity.DataAccessEntity.Entities.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20231122194254_Actualizacion")]
-    partial class Actualizacion
+    [Migration("20231122213451_Primer migracion")]
+    partial class Primermigracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,10 +38,38 @@ namespace Axity.DataAccessEntity.Entities.Data.Migration
                     b.HasKey("Id");
 
                     b.ToTable("Actions", "act");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Alta"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Baja"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Cambios"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Actualizar"
+                        });
                 });
 
             modelBuilder.Entity("Axity.DataAccessEntity.Entities.Model.Actions.ActSubPageModel", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
                     b.Property<int>("ActionId")
                         .HasColumnType("int");
 
@@ -54,8 +82,7 @@ namespace Axity.DataAccessEntity.Entities.Data.Migration
                     b.Property<int?>("SubMenuId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SubMenuId")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
                     b.HasIndex("ActionsId");
 
@@ -64,6 +91,164 @@ namespace Axity.DataAccessEntity.Entities.Data.Migration
                     b.HasIndex("SubMenuId");
 
                     b.ToTable("ActSubPages", "act");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ActionId = 1,
+                            SubMenuId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ActionId = 2,
+                            SubMenuId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ActionId = 3,
+                            SubMenuId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ActionId = 4,
+                            SubMenuId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ActionId = 1,
+                            SubMenuId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ActionId = 2,
+                            SubMenuId = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ActionId = 3,
+                            SubMenuId = 2
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ActionId = 4,
+                            SubMenuId = 2
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ActionId = 1,
+                            SubMenuId = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ActionId = 3,
+                            SubMenuId = 3
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ActionId = 1,
+                            SubMenuId = 4
+                        },
+                        new
+                        {
+                            Id = 12,
+                            ActionId = 2,
+                            SubMenuId = 4
+                        },
+                        new
+                        {
+                            Id = 13,
+                            ActionId = 3,
+                            SubMenuId = 4
+                        },
+                        new
+                        {
+                            Id = 14,
+                            ActionId = 4,
+                            SubMenuId = 4
+                        },
+                        new
+                        {
+                            Id = 15,
+                            ActionId = 1,
+                            FkPage = 1
+                        },
+                        new
+                        {
+                            Id = 16,
+                            ActionId = 2,
+                            FkPage = 1
+                        },
+                        new
+                        {
+                            Id = 17,
+                            ActionId = 3,
+                            FkPage = 1
+                        },
+                        new
+                        {
+                            Id = 18,
+                            ActionId = 1,
+                            FkPage = 2
+                        },
+                        new
+                        {
+                            Id = 19,
+                            ActionId = 2,
+                            FkPage = 2
+                        },
+                        new
+                        {
+                            Id = 20,
+                            ActionId = 3,
+                            FkPage = 2
+                        },
+                        new
+                        {
+                            Id = 21,
+                            ActionId = 4,
+                            FkPage = 2
+                        },
+                        new
+                        {
+                            Id = 22,
+                            ActionId = 1,
+                            FkPage = 3
+                        },
+                        new
+                        {
+                            Id = 23,
+                            ActionId = 2,
+                            FkPage = 3
+                        },
+                        new
+                        {
+                            Id = 24,
+                            ActionId = 2,
+                            FkPage = 4
+                        },
+                        new
+                        {
+                            Id = 25,
+                            ActionId = 3,
+                            FkPage = 4
+                        },
+                        new
+                        {
+                            Id = 26,
+                            ActionId = 4,
+                            FkPage = 4
+                        });
                 });
 
             modelBuilder.Entity("Axity.DataAccessEntity.Entities.Model.Menu.MenuModel", b =>
@@ -167,6 +352,62 @@ namespace Axity.DataAccessEntity.Entities.Data.Migration
                     b.HasIndex("SubMenuId");
 
                     b.ToTable("Pages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "page",
+                            Icon = "page",
+                            Name = "page",
+                            Status = true,
+                            SubMenuId = 4
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "page 1",
+                            Icon = "page 1",
+                            Name = "page 1",
+                            Status = true,
+                            SubMenuId = 4
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Code = "page 2",
+                            Icon = "page 2",
+                            Name = "page 2",
+                            Status = true,
+                            SubMenuId = 4
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Code = "page 5",
+                            Icon = "page 5",
+                            Name = "page 5",
+                            Status = true,
+                            SubMenuId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Code = "page 6",
+                            Icon = "page 6",
+                            Name = "page 6",
+                            Status = true,
+                            SubMenuId = 4
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Code = "page 7",
+                            Icon = "page 7",
+                            Name = "page 7",
+                            Status = true,
+                            SubMenuId = 4
+                        });
                 });
 
             modelBuilder.Entity("Axity.DataAccessEntity.Entities.Model.Menu.SubMenuModel", b =>
@@ -200,6 +441,80 @@ namespace Axity.DataAccessEntity.Entities.Data.Migration
                     b.HasIndex("MenuId");
 
                     b.ToTable("subMenus");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "submenu",
+                            Icon = "submenu",
+                            MenuId = 1,
+                            Name = "submenu",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "submenu 1",
+                            Icon = "submenu 1",
+                            MenuId = 1,
+                            Name = "submenu 1",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Code = "submenu 4",
+                            Icon = "submenu 4",
+                            MenuId = 2,
+                            Name = "submenu 4",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Code = "submenu 5",
+                            Icon = "submenu 5",
+                            MenuId = 2,
+                            Name = "submenu 5",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Code = "submenu 6",
+                            Icon = "submenu 6",
+                            MenuId = 3,
+                            Name = "submenu 6",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Code = "submenu 7",
+                            Icon = "submenu 7",
+                            MenuId = 3,
+                            Name = "submenu 7",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Code = "submenu 8",
+                            Icon = "submenu 8",
+                            MenuId = 4,
+                            Name = "submenu 8",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Code = "submenu 9",
+                            Icon = "submenu 9",
+                            MenuId = 5,
+                            Name = "submenu 9",
+                            Status = true
+                        });
                 });
 
             modelBuilder.Entity("Axity.DataAccessEntity.Entities.Model.Rols.RolModel", b =>
@@ -279,9 +594,9 @@ namespace Axity.DataAccessEntity.Entities.Data.Migration
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(120)
+                        .HasMaxLength(10)
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(120)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<DateTime>("RegisterDate")
                         .HasColumnType("datetime2");
@@ -305,7 +620,9 @@ namespace Axity.DataAccessEntity.Entities.Data.Migration
 
                     b.ToTable("Users", (string)null);
 
-                    b.ToTable(tb => tb.IsTemporal(ttb =>
+                    b
+                        .HasComment("Tabla usuarios")
+                        .ToTable(tb => tb.IsTemporal(ttb =>
                         {
                             ttb
                                 .HasPeriodStart("PeriodStart")
