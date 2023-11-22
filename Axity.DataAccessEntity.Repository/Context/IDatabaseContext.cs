@@ -8,10 +8,12 @@
 
 namespace Axity.DataAccessEntity.Entities.Context
 {
-    using Axity.DataAccessEntity.Entities.Model;
+    using Axity.DataAccessEntity.Entities.Model.Actions;
+    using Axity.DataAccessEntity.Entities.Model.Menu;
     using Axity.DataAccessEntity.Entities.Model.Rols;
     using Axity.DataAccessEntity.Entities.Model.User;
     using Microsoft.EntityFrameworkCore;
+    using System;
 
     /// <summary>
     /// Interface IDataBaseContext.
@@ -22,5 +24,10 @@ namespace Axity.DataAccessEntity.Entities.Context
         DbSet<UserModel> Users { get; set; }
         DbSet<RolModel> Rols { get; set; }
         DbSet<UserRolModel> UserRols { get; set; }
+        DbSet<MenuModel> Menus { get; set; }
+        DbSet<SubMenuModel> subMenus { get; set; }
+        DbSet<PageModel> Pages { get; set; }
+        DbSet<ActionModel> Actions { get; set; }
+        DbSet<ActSubPageModel> ActionSubPage { get; set; }
     }
 }

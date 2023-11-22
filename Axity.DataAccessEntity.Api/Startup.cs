@@ -11,10 +11,12 @@ namespace Axity.DataAccessEntity.Api
     using System;
     using Axity.DataAccessEntity.Api.Filters;
     using Axity.DataAccessEntity.DependencyInjection;
+    using Axity.DataAccessEntity.Entities.Context;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.ResponseCompression;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
@@ -125,6 +127,12 @@ namespace Axity.DataAccessEntity.Api
             {
                 endpoints.MapControllers();
             });
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var application = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+                application.Database.Migrate();
+            }
         }
 
         /// <summary>

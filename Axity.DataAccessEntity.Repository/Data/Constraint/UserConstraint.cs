@@ -9,6 +9,8 @@ namespace Axity.DataAccessEntity.Entities.Data.Constraint
         {
             modelBuilder.Entity<UserModel>().Property(e => e.Mail).IsUnicode(true);
             modelBuilder.Entity<UserModel>().Property(e => e.Phone).IsUnicode(true);
+            modelBuilder.Entity<UserModel>().ToTable("Users", c => c.IsTemporal());
+
             modelBuilder.Entity<UserRolModel>().HasKey(e => new { e.UserId, e.RolId });
         }
     }

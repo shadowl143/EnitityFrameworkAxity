@@ -20,8 +20,5 @@ namespace Axity.DataAccessEntity.Entities.Model.Rols
 
         [Column("Estado")]
         public bool Status { get; set; }
-       
-
-        public int? UserId { get; set; }
     }
 }

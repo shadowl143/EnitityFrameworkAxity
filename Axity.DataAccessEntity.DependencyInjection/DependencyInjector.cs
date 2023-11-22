@@ -40,14 +40,14 @@ namespace Axity.DataAccessEntity.DependencyInjection
         /// <param name="configuration">Configuration Options.</param>
         public static void AddDbContext(IConfiguration configuration)
         {
-            /// Services.AddDbContextPool<DatabaseContext>(options => options.UseSqlServer(configuration.GetConnectionString(nameof(DatabaseContext))));
+             Services.AddDbContextPool<DatabaseContext>(options => options.UseSqlServer(configuration.GetConnectionString(nameof(DatabaseContext))));
 
             // Services.AddDbContextPool<DatabaseContext>(opt =>
             // {
             //    opt.UseMySql(configuration.GetConnectionString(nameof(DatabaseContext)), MySqlServerVersion.AutoDetect(configuration.GetConnectionString(nameof(DatabaseContext))));
             // });
 
-            Services.AddDbContextPool<DatabaseContext>(options => options.UseSqlite(configuration.GetConnectionString("DatabaseContext")));
+            // Services.AddDbContextPool<DatabaseContext>(options => options.UseSqlite(configuration.GetConnectionString("DatabaseContext")));
         }
 
         /// <summary>
